@@ -6,30 +6,51 @@
 #include<QtSql/QSqlQueryModel>
 #include <QDebug>
 
-// id, nom, category, price, quantity
+
 class produit
 {
 public:
-    produit();
-    produit(QString,QString,int,int);
-    int get_id();
-
+    //setters
     void Set_nom(QString val) ;
-    QString get_nom();
-
     void Set_categorie(QString val) ;
-    QString get_categorie();
-
     void Set_prix(int val) ;
+    void Set_quantite(int val) ;
+    //getters
+    int get_id();
+    QString get_categorie();
+    QString get_nom();
     int get_prix();
-
-    void Set_quantite(QString val) ;
     int get_quantite();
+    int get_idfournisseur(QString nomfournisseur);
+
+    //constructeurs
+    produit();
+    produit(QString,QString,int,int,int);
+
 
     bool ajouter();
-    bool  modifier_produit(int,QString,QString,int,int);
+
+   bool  modifier_produit(int,QString,QString,int,int,int);
+
     bool supprimer(int idd);
     QSqlQueryModel * afficher();
+
+    bool checkchar(QString);
+        bool checkint(QString);
+
+void on_recherche_textChanged(const QString &arg1);
+void on_recherche2_textChanged(const QString &arg1);
+
+    QSqlQueryModel *afficher_idrech(QString);
+    QSqlQueryModel *afficher_catrech(QString);
+
+    QSqlQueryModel *tri_Categorie();
+    QSqlQueryModel *tri_ID();
+    QSqlQueryModel *tri_quantite();
+
+
+
+
 
 private:
     int id;
@@ -37,6 +58,7 @@ private:
     QString categorie;
     int prix;
     int quantite;
+    int idfournisseur;
 };
 
 #endif // produit_H

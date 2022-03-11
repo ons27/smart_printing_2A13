@@ -54,11 +54,27 @@ private slots:
 
     void on_buttonBox_2_accepted();
 
-    void on_PdfBtn_3_clicked();
+    //void on_PdfBtn_3_clicked();
 
     void on_pushButton_3_clicked();
 
     void on_pushButton_4_clicked();
+
+    void on_table_activated(const QModelIndex &index);
+
+
+
+    void on_recherche_textChanged(const QString &arg1);
+
+    void on_recherche2_textChanged(const QString &arg1);
+
+    void on_tri_categorie_clicked();
+
+    void on_tri_id_clicked();
+
+    void on_tri_quantite_clicked();
+
+
 
 private:
     Ui::MainWindow *ui;
