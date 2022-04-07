@@ -18,13 +18,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     connection.cpp \
     equipements.cpp \
+    interventions.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    qrcode.cpp
 
 HEADERS += \
     connection.h \
     equipements.h \
-    mainwindow.h
+    interventions.h \
+    mainwindow.h \
+    qrcode.h
 
 FORMS += \
     mainwindow.ui

@@ -78,7 +78,7 @@ QPushButton{
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="MainPage">
      <widget class="QWidget" name="mainBodyContainer" native="true">
@@ -174,7 +174,7 @@ font: 75 16pt &quot;MS Shell Dlg 2&quot;;
          </rect>
         </property>
         <property name="value">
-         <number>37</number>
+         <number>90</number>
         </property>
        </widget>
        <widget class="QLabel" name="label_18">
@@ -373,7 +373,7 @@ background-color:rgb(0, 0, 0);</string>
                 <string>Pdf</string>
                </property>
                <property name="text">
-                <string>Add maintenance</string>
+                <string>Add intervention</string>
                </property>
                <property name="icon">
                 <iconset>
@@ -715,7 +715,7 @@ background-color:rgb(0, 0, 0);</string>
                 <string>Pdf</string>
                </property>
                <property name="text">
-                <string>Add maintenance</string>
+                <string>Add intervention</string>
                </property>
                <property name="icon">
                 <iconset>
@@ -1033,7 +1033,7 @@ font: 9pt &quot;MS Shell Dlg 2&quot;;
          <string notr="true">color:rgb(203, 186, 143);</string>
         </property>
         <property name="currentIndex">
-         <number>2</number>
+         <number>3</number>
         </property>
         <widget class="QWidget" name="Delete">
          <attribute name="title">
@@ -1262,6 +1262,89 @@ font: 9pt &quot;MS Shell Dlg 2&quot;;
           </widget>
          </widget>
         </widget>
+        <widget class="QWidget" name="tab_2">
+         <attribute name="title">
+          <string>Trie</string>
+         </attribute>
+         <widget class="QPushButton" name="PdfBtn_7">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>60</y>
+            <width>138</width>
+            <height>26</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>Pdf</string>
+          </property>
+          <property name="text">
+           <string>Trie par id</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>icon/refresh-ccw.svg</normaloff>icon/refresh-ccw.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="PdfBtn_8">
+          <property name="geometry">
+           <rect>
+            <x>360</x>
+            <y>60</y>
+            <width>138</width>
+            <height>26</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>Pdf</string>
+          </property>
+          <property name="text">
+           <string>trie par nom</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>icon/refresh-ccw.svg</normaloff>icon/refresh-ccw.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="PdfBtn_9">
+          <property name="geometry">
+           <rect>
+            <x>610</x>
+            <y>60</y>
+            <width>138</width>
+            <height>26</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>Pdf</string>
+          </property>
+          <property name="text">
+           <string>trie par prix</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>icon/refresh-ccw.svg</normaloff>icon/refresh-ccw.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </widget>
+        </widget>
         <widget class="QWidget" name="GeneratePDF">
          <attribute name="title">
           <string>Generate PDF</string>
@@ -1325,7 +1408,7 @@ font: 9pt &quot;MS Shell Dlg 2&quot;;
           <selectedon>icon/search.svg</selectedon>icon/search.svg</iconset>
         </property>
        </widget>
-       <widget class="QTextEdit" name="textEdit">
+       <widget class="QLineEdit" name="lineEdit_4">
         <property name="geometry">
          <rect>
           <x>0</x>
@@ -1333,10 +1416,6 @@ font: 9pt &quot;MS Shell Dlg 2&quot;;
           <width>281</width>
           <height>31</height>
          </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color:#fff;
-color:rgb(0, 0, 0);</string>
         </property>
        </widget>
       </widget>
@@ -1528,7 +1607,7 @@ background-color:rgb(0, 0, 0);</string>
                    <string>Pdf</string>
                   </property>
                   <property name="text">
-                   <string>Add maintenance</string>
+                   <string>Add intervention</string>
                   </property>
                   <property name="icon">
                    <iconset>
@@ -2103,7 +2182,7 @@ background-color:rgb(0, 0, 0);</string>
                    <string>Pdf</string>
                   </property>
                   <property name="text">
-                   <string>Add maintenance</string>
+                   <string>Add intervention</string>
                   </property>
                   <property name="icon">
                    <iconset>
@@ -2302,7 +2381,7 @@ background-color:rgb(0, 0, 0);</string>
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>911</width>
+            <width>921</width>
             <height>53</height>
            </rect>
           </property>
@@ -2361,7 +2440,7 @@ font: 75 16pt &quot;MS Shell Dlg 2&quot;;
             <string notr="true">font: 75 10pt &quot;MS Shell Dlg 2&quot;;</string>
            </property>
            <property name="title">
-            <string>List maintenance</string>
+            <string>List intervention</string>
            </property>
            <widget class="QTableView" name="table_2">
             <property name="geometry">
@@ -2419,12 +2498,147 @@ font: 9pt &quot;MS Shell Dlg 2&quot;;
             <string notr="true">color:rgb(203, 186, 143);</string>
            </property>
            <property name="currentIndex">
-            <number>0</number>
+            <number>3</number>
            </property>
            <widget class="QWidget" name="tab">
             <attribute name="title">
-             <string>Add maintenance</string>
+             <string>Add intervention</string>
             </attribute>
+            <widget class="QGroupBox" name="groupBox_8">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>881</width>
+               <height>191</height>
+              </rect>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">font: 75 9pt &quot;MS Shell Dlg 2&quot;;</string>
+             </property>
+             <property name="title">
+              <string>Add intervention</string>
+             </property>
+             <widget class="QPushButton" name="pushButton_8">
+              <property name="geometry">
+               <rect>
+                <x>760</x>
+                <y>140</y>
+                <width>93</width>
+                <height>28</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Add</string>
+              </property>
+              <property name="icon">
+               <iconset>
+                <normaloff>icon/plus.svg</normaloff>icon/plus.svg</iconset>
+              </property>
+             </widget>
+             <widget class="QLineEdit" name="lineEdit_18">
+              <property name="geometry">
+               <rect>
+                <x>560</x>
+                <y>80</y>
+                <width>113</width>
+                <height>22</height>
+               </rect>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_22">
+              <property name="geometry">
+               <rect>
+                <x>80</x>
+                <y>60</y>
+                <width>101</width>
+                <height>16</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Equipement id</string>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_23">
+              <property name="geometry">
+               <rect>
+                <x>560</x>
+                <y>60</y>
+                <width>56</width>
+                <height>16</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Type</string>
+              </property>
+             </widget>
+             <widget class="QComboBox" name="comboBox_3">
+              <property name="geometry">
+               <rect>
+                <x>80</x>
+                <y>80</y>
+                <width>121</width>
+                <height>22</height>
+               </rect>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_25">
+              <property name="geometry">
+               <rect>
+                <x>240</x>
+                <y>60</y>
+                <width>101</width>
+                <height>16</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Employee ID</string>
+              </property>
+             </widget>
+             <widget class="QComboBox" name="comboBox_4">
+              <property name="geometry">
+               <rect>
+                <x>240</x>
+                <y>80</y>
+                <width>111</width>
+                <height>22</height>
+               </rect>
+              </property>
+             </widget>
+             <widget class="QLabel" name="label_26">
+              <property name="geometry">
+               <rect>
+                <x>390</x>
+                <y>60</y>
+                <width>101</width>
+                <height>16</height>
+               </rect>
+              </property>
+              <property name="text">
+               <string>Status</string>
+              </property>
+             </widget>
+             <widget class="QComboBox" name="comboBox_6">
+              <property name="geometry">
+               <rect>
+                <x>390</x>
+                <y>80</y>
+                <width>121</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <item>
+               <property name="text">
+                <string>done</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>not done</string>
+               </property>
+              </item>
+             </widget>
+            </widget>
            </widget>
            <widget class="QWidget" name="Delete_2">
             <attribute name="title">
@@ -2443,7 +2657,7 @@ font: 9pt &quot;MS Shell Dlg 2&quot;;
               <string notr="true">font: 75 10pt &quot;MS Shell Dlg 2&quot;;</string>
              </property>
              <property name="title">
-              <string>Delete Maintenance</string>
+              <string>Delete intervention</string>
              </property>
              <widget class="QLineEdit" name="lineEdit_11">
               <property name="geometry">
@@ -2504,7 +2718,7 @@ font: 9pt &quot;MS Shell Dlg 2&quot;;
               <string notr="true">font: 75 9pt &quot;MS Shell Dlg 2&quot;;</string>
              </property>
              <property name="title">
-              <string>Update Maintenance</string>
+              <string>Update intervention</string>
              </property>
              <widget class="QPushButton" name="pushButton_7">
               <property name="geometry">
@@ -2527,16 +2741,6 @@ font: 9pt &quot;MS Shell Dlg 2&quot;;
               <property name="geometry">
                <rect>
                 <x>40</x>
-                <y>30</y>
-                <width>113</width>
-                <height>22</height>
-               </rect>
-              </property>
-             </widget>
-             <widget class="QLineEdit" name="lineEdit_13">
-              <property name="geometry">
-               <rect>
-                <x>170</x>
                 <y>80</y>
                 <width>113</width>
                 <height>22</height>
@@ -2546,27 +2750,7 @@ font: 9pt &quot;MS Shell Dlg 2&quot;;
              <widget class="QLineEdit" name="lineEdit_14">
               <property name="geometry">
                <rect>
-                <x>320</x>
-                <y>80</y>
-                <width>113</width>
-                <height>22</height>
-               </rect>
-              </property>
-             </widget>
-             <widget class="QLineEdit" name="lineEdit_15">
-              <property name="geometry">
-               <rect>
-                <x>470</x>
-                <y>80</y>
-                <width>113</width>
-                <height>22</height>
-               </rect>
-              </property>
-             </widget>
-             <widget class="QLineEdit" name="lineEdit_16">
-              <property name="geometry">
-               <rect>
-                <x>610</x>
+                <x>300</x>
                 <y>80</y>
                 <width>113</width>
                 <height>22</height>
@@ -2576,8 +2760,8 @@ font: 9pt &quot;MS Shell Dlg 2&quot;;
              <widget class="QLabel" name="label_2">
               <property name="geometry">
                <rect>
-                <x>20</x>
-                <y>30</y>
+                <x>40</x>
+                <y>60</y>
                 <width>21</width>
                 <height>16</height>
                </rect>
@@ -2586,58 +2770,87 @@ font: 9pt &quot;MS Shell Dlg 2&quot;;
                <string>ID</string>
               </property>
              </widget>
-             <widget class="QLabel" name="label_14">
-              <property name="geometry">
-               <rect>
-                <x>180</x>
-                <y>60</y>
-                <width>56</width>
-                <height>16</height>
-               </rect>
-              </property>
-              <property name="text">
-               <string>Name</string>
-              </property>
-             </widget>
              <widget class="QLabel" name="label_15">
               <property name="geometry">
                <rect>
-                <x>330</x>
+                <x>300</x>
                 <y>60</y>
                 <width>56</width>
                 <height>16</height>
                </rect>
               </property>
               <property name="text">
-               <string>Brand</string>
-              </property>
-             </widget>
-             <widget class="QLabel" name="label_20">
-              <property name="geometry">
-               <rect>
-                <x>480</x>
-                <y>60</y>
-                <width>56</width>
-                <height>16</height>
-               </rect>
-              </property>
-              <property name="text">
-               <string>Price</string>
+               <string>Type</string>
               </property>
              </widget>
              <widget class="QLabel" name="label_21">
               <property name="geometry">
                <rect>
-                <x>620</x>
+                <x>560</x>
                 <y>60</y>
                 <width>56</width>
                 <height>16</height>
                </rect>
               </property>
               <property name="text">
-               <string>Statut</string>
+               <string>Status</string>
               </property>
              </widget>
+             <widget class="QComboBox" name="comboBox_5">
+              <property name="geometry">
+               <rect>
+                <x>560</x>
+                <y>80</y>
+                <width>101</width>
+                <height>22</height>
+               </rect>
+              </property>
+              <item>
+               <property name="text">
+                <string>done</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>not done</string>
+               </property>
+              </item>
+             </widget>
+            </widget>
+           </widget>
+           <widget class="QWidget" name="tab_3">
+            <attribute name="title">
+             <string>QR CODE</string>
+            </attribute>
+            <widget class="QLabel" name="label_14">
+             <property name="geometry">
+              <rect>
+               <x>210</x>
+               <y>50</y>
+               <width>421</width>
+               <height>111</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="pushButton_9">
+             <property name="geometry">
+              <rect>
+               <x>770</x>
+               <y>150</y>
+               <width>93</width>
+               <height>28</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string>generate</string>
+             </property>
+             <property name="icon">
+              <iconset>
+               <normaloff>icon/refresh-cw.svg</normaloff>icon/refresh-cw.svg</iconset>
+             </property>
             </widget>
            </widget>
           </widget>

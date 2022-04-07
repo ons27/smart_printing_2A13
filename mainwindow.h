@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "equipements.h"
+#include "interventions.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -68,8 +69,31 @@ private slots:
 
     void on_table_activated(const QModelIndex &index);
 
+    void on_PdfBtn_7_clicked();
+
+    void on_PdfBtn_8_clicked();
+
+    void on_PdfBtn_9_clicked();
+
+    void on_pushButton_5_clicked();
+
+    void on_lineEdit_4_textChanged(const QString &arg1);
+
+    void on_PdfBtn_6_clicked();
+
+    void on_pushButton_8_clicked();
+
+    void on_table_2_activated(const QModelIndex &index);
+
+    void on_pushButton_6_clicked();
+
+    void on_pushButton_7_clicked();
+
+    void on_pushButton_9_clicked();
+
 private:
     Ui::MainWindow *ui;
     equipement e;
+    interventions i;
 };
 #endif // MAINWINDOW_H

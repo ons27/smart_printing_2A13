@@ -26,6 +26,12 @@ public:
     bool supprimer(int idd);
     bool check (int id );
     QSqlQueryModel * afficher();
+    QSqlQueryModel * trie_id();
+    QSqlQueryModel * trie_nom();
+    QSqlQueryModel * trie_prix();
+    QSqlQueryModel * chercher_id(QString input);
+    void notification(QString);
+    void Signal();
 private:
     int id;
     QString nom;
