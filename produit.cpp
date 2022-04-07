@@ -99,18 +99,18 @@ bool produit::supprimer(int idd)
 bool produit :: modifier_produit(int id,QString nom,QString categorie,int prix,int quantite,int idfournisseur)
 {
 
-    QSqlQuery qry;
-        qry.prepare("UPDATE produits set nom=(?),categorie=(?),prix_unitaire=(?),quantite=(?), id_fournisseur=(?) where ID_PRODUITS=(?) ");
+    QSqlQuery query;
+        query.prepare("UPDATE produits set nom=(?),categorie=(?),prix_unitaire=(?),quantite=(?), id_fournisseur=(?) where ID_PRODUITS=(?) ");
 
-        qry.addBindValue(nom);
-        qry.addBindValue(categorie);
-        qry.addBindValue(prix);
-        qry.addBindValue(quantite);
-        qry.addBindValue(idfournisseur);
-        qry.addBindValue(id);
+        query.addBindValue(nom);
+        query.addBindValue(categorie);
+        query.addBindValue(prix);
+        query.addBindValue(quantite);
+        query.addBindValue(idfournisseur);
+        query.addBindValue(id);
 
 
-   return  qry.exec();
+   return  query.exec();
 }
 
 bool produit::checkint(QString x) //verifier si la valeur saisie est int ou float
@@ -191,7 +191,19 @@ QSqlQueryModel *produit::afficher_catrech(QString q)
 
           return model;
     }
+QSqlQueryModel *produit::afficher_nomrech(QString q)
+{
+         QString res= nom;
+         QSqlQueryModel *model=new QSqlQueryModel();
+          model->setQuery("SELECT * FROM produits  WHERE nom like '%"+q+"%'" );
+          model->setHeaderData (0, Qt:: Horizontal,QObject::tr ("ID"));
+          model->setHeaderData (3, Qt::Horizontal,QObject::tr("Name"));
+          model->setHeaderData (1, Qt:: Horizontal,QObject::tr ("Category"));
+          model->setHeaderData (4, Qt:: Horizontal,QObject::tr ("Price"));
+          model->setHeaderData (2, Qt:: Horizontal,QObject::tr ("Quantity"));
 
+          return model;
+    }
 
 
 
@@ -236,18 +248,16 @@ QSqlQueryModel * produit::tri_quantite()
 }
 
 
-/*
 void produit::statistique(QVector<double>* ticks,QVector<QString> *labels)
-{
-    QSqlQuery q;
-    int i=0;
-    q.exec("select QUANTITE from produits");
-    while (q.next())
-    {
-        QString id_produits = q.value(0).toString();
-        i++;
-        *ticks<<i;
-        *labels <<id_produits;
-    }
-}
-*/
+ {
+     QSqlQuery q;
+     int i=0;
+     q.exec("select NOM from PRODUITS");
+     while (q.next())
+     {
+         QString identifiant = q.value(0).toString();
+         i++;
+         *ticks<<i;
+         *labels <<identifiant;
+     }
+ }

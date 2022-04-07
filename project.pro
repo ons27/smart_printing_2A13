@@ -1,7 +1,10 @@
 QT       += core gui sql
+QT       += charts\
+
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-
+QT += widgets charts
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets printsupport
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
@@ -19,12 +22,16 @@ SOURCES += \
     connection.cpp \
     main.cpp \
     mainwindow.cpp \
-    produit.cpp
+    notification.cpp \
+    produit.cpp \
+    qcustomplot.cpp
 
 HEADERS += \
     connection.h \
     mainwindow.h \
-    produit.h
+    notification.h \
+    produit.h \
+    qcustomplot.h
 
 FORMS += \
     mainwindow.ui

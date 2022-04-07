@@ -78,7 +78,7 @@ QPushButton{
      <string notr="true"/>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="MainPage">
      <widget class="QWidget" name="mainBodyContainer" native="true">
@@ -247,7 +247,7 @@ QPushButton{
                 <string>Home</string>
                </property>
                <property name="styleSheet">
-                <string notr="true"/>
+                <string notr="true">font: 10pt &quot;MS Shell Dlg 2&quot;;</string>
                </property>
                <property name="text">
                 <string>Home</string>
@@ -270,6 +270,9 @@ QPushButton{
                <property name="toolTip">
                 <string>Data</string>
                </property>
+               <property name="styleSheet">
+                <string notr="true">font: 10pt &quot;MS Shell Dlg 2&quot;;</string>
+               </property>
                <property name="text">
                 <string>Product List</string>
                </property>
@@ -289,7 +292,9 @@ QPushButton{
              <item>
               <widget class="QPushButton" name="addeq">
                <property name="styleSheet">
-                <string notr="true">font: 75 9pt &quot;MS Shell Dlg 2&quot;;</string>
+                <string notr="true">font: 75 9pt &quot;MS Shell Dlg 2&quot;;
+font: 10pt &quot;MS Shell Dlg 2&quot;;
+</string>
                </property>
                <property name="text">
                 <string>Add Product</string>
@@ -307,42 +312,16 @@ QPushButton{
               </widget>
              </item>
              <item>
-              <widget class="QPushButton" name="PdfBtn">
-               <property name="toolTip">
-                <string>Pdf</string>
-               </property>
-               <property name="text">
-                <string>Notifications</string>
-               </property>
-               <property name="icon">
-                <iconset>
-                 <normaloff>icon/notification.png</normaloff>icon/notification.png</iconset>
-               </property>
-               <property name="iconSize">
-                <size>
-                 <width>20</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="PdfBtn_6">
-               <property name="toolTip">
-                <string>Pdf</string>
+              <widget class="QPushButton" name="pushButton_6">
+               <property name="styleSheet">
+                <string notr="true">font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
                </property>
                <property name="text">
                 <string>Statistics</string>
                </property>
                <property name="icon">
                 <iconset>
-                 <normaloff>icon/percent.svg</normaloff>icon/percent.svg</iconset>
-               </property>
-               <property name="iconSize">
-                <size>
-                 <width>20</width>
-                 <height>20</height>
-                </size>
+                 <normaloff>../../Downloads/bar-chart (1).svg</normaloff>../../Downloads/bar-chart (1).svg</iconset>
                </property>
               </widget>
              </item>
@@ -358,6 +337,20 @@ QPushButton{
                 </size>
                </property>
               </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pushButton_9">
+               <property name="styleSheet">
+                <string notr="true">font: 11pt &quot;MS Shell Dlg 2&quot;;</string>
+               </property>
+               <property name="text">
+                <string>Statistics</string>
+               </property>
+               <property name="icon">
+                <iconset>
+                 <normaloff>../../Downloads/bar-chart (1).svg</normaloff>../../Downloads/bar-chart (1).svg</iconset>
+               </property>
+              </widget>
              </item>
              <item>
               <spacer name="verticalSpacer_7">
@@ -904,7 +897,7 @@ QPushButton{
          <rect>
           <x>20</x>
           <y>20</y>
-          <width>711</width>
+          <width>851</width>
           <height>271</height>
          </rect>
         </property>
@@ -917,9 +910,9 @@ QPushButton{
         <widget class="QTableView" name="table">
          <property name="geometry">
           <rect>
-           <x>10</x>
+           <x>20</x>
            <y>30</y>
-           <width>681</width>
+           <width>801</width>
            <height>221</height>
           </rect>
          </property>
@@ -932,20 +925,6 @@ font: 75 8pt &quot;MS Shell Dlg 2&quot;;</string>
          </property>
         </widget>
        </widget>
-       <widget class="QLineEdit" name="recherche2">
-        <property name="geometry">
-         <rect>
-          <x>760</x>
-          <y>200</y>
-          <width>101</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(255, 255, 255);
-color: rgb(0, 0, 0);</string>
-        </property>
-       </widget>
        <widget class="QTabWidget" name="tabWidget">
         <property name="geometry">
          <rect>
@@ -955,8 +934,11 @@ color: rgb(0, 0, 0);</string>
           <height>221</height>
          </rect>
         </property>
+        <property name="styleSheet">
+         <string notr="true">color: rgb(0, 0, 0);</string>
+        </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>5</number>
         </property>
         <widget class="QWidget" name="tab_3">
          <attribute name="title">
@@ -967,12 +949,13 @@ color: rgb(0, 0, 0);</string>
            <rect>
             <x>30</x>
             <y>10</y>
-            <width>331</width>
-            <height>141</height>
+            <width>561</width>
+            <height>171</height>
            </rect>
           </property>
           <property name="styleSheet">
            <string notr="true">font: 75 8pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(255, 255, 255);
 font: 75 10pt &quot;MS Shell Dlg 2&quot;;</string>
           </property>
           <property name="title">
@@ -981,20 +964,20 @@ font: 75 10pt &quot;MS Shell Dlg 2&quot;;</string>
           <widget class="QLineEdit" name="lineEdit_5">
            <property name="geometry">
             <rect>
-             <x>70</x>
+             <x>200</x>
              <y>50</y>
-             <width>113</width>
-             <height>22</height>
+             <width>131</width>
+             <height>31</height>
             </rect>
            </property>
           </widget>
           <widget class="QLabel" name="label">
            <property name="geometry">
             <rect>
-             <x>10</x>
+             <x>130</x>
              <y>50</y>
-             <width>56</width>
-             <height>16</height>
+             <width>61</width>
+             <height>21</height>
             </rect>
            </property>
            <property name="text">
@@ -1004,14 +987,16 @@ font: 75 10pt &quot;MS Shell Dlg 2&quot;;</string>
           <widget class="QPushButton" name="pushButton_3">
            <property name="geometry">
             <rect>
-             <x>110</x>
-             <y>90</y>
-             <width>93</width>
-             <height>28</height>
+             <x>220</x>
+             <y>110</y>
+             <width>91</width>
+             <height>31</height>
             </rect>
            </property>
            <property name="styleSheet">
             <string notr="true">font: 75 8pt &quot;MS Shell Dlg 2&quot;;
+font: 75 10pt &quot;MS Shell Dlg 2&quot;;
+font: 75 10pt &quot;MS Shell Dlg 2&quot;;
 font: 75 8pt &quot;MS Shell Dlg 2&quot;;
 color: rgb(255, 0, 0);</string>
            </property>
@@ -1036,6 +1021,7 @@ color: rgb(255, 0, 0);</string>
           </property>
           <property name="styleSheet">
            <string notr="true">font: 75 8pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(255, 255, 255);
 font: 75 10pt &quot;MS Shell Dlg 2&quot;;</string>
           </property>
           <property name="title">
@@ -1235,17 +1221,54 @@ background-color: rgb(255, 255, 255);
          <widget class="QPushButton" name="PdfBtn_2">
           <property name="geometry">
            <rect>
-            <x>90</x>
+            <x>350</x>
             <y>70</y>
-            <width>101</width>
-            <height>26</height>
+            <width>121</width>
+            <height>51</height>
            </rect>
           </property>
           <property name="toolTip">
            <string>Pdf</string>
           </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(255, 255, 255);</string>
+          </property>
           <property name="text">
            <string>Export PDF</string>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>icon/printer.svg</normaloff>icon/printer.svg</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>20</width>
+            <height>20</height>
+           </size>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QWidget" name="tab_2">
+         <attribute name="title">
+          <string>Excel</string>
+         </attribute>
+         <widget class="QPushButton" name="Excel">
+          <property name="geometry">
+           <rect>
+            <x>330</x>
+            <y>60</y>
+            <width>121</width>
+            <height>51</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>Pdf</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(255, 255, 255);</string>
+          </property>
+          <property name="text">
+           <string>Excel</string>
           </property>
           <property name="icon">
            <iconset>
@@ -1276,10 +1299,11 @@ background-color: rgb(255, 255, 255);
            <enum>Qt::LeftToRight</enum>
           </property>
           <property name="styleSheet">
-           <string notr="true">font: 75 10pt &quot;MS Shell Dlg 2&quot;;</string>
+           <string notr="true">font: 75 10pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(255, 255, 255);</string>
           </property>
           <property name="text">
-           <string>Tri par Quantité</string>
+           <string>Sort By Quantity</string>
           </property>
          </widget>
          <widget class="QPushButton" name="tri_categorie">
@@ -1291,8 +1315,12 @@ background-color: rgb(255, 255, 255);
             <height>41</height>
            </rect>
           </property>
+          <property name="styleSheet">
+           <string notr="true">font: 75 10pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(255, 255, 255);</string>
+          </property>
           <property name="text">
-           <string>Tri Par catégorie </string>
+           <string>Sort By Category</string>
           </property>
          </widget>
          <widget class="QPushButton" name="tri_id">
@@ -1304,111 +1332,192 @@ background-color: rgb(255, 255, 255);
             <height>41</height>
            </rect>
           </property>
+          <property name="styleSheet">
+           <string notr="true">font: 75 10pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(255, 255, 255);</string>
+          </property>
           <property name="text">
-           <string>Tri par ID</string>
+           <string>Sort By ID</string>
           </property>
          </widget>
         </widget>
-       </widget>
-       <widget class="QPushButton" name="pushButton">
-        <property name="geometry">
-         <rect>
-          <x>860</x>
-          <y>130</y>
-          <width>31</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color:#fff;</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>icon/search.svg</normaloff>
-          <normalon>icon/search.svg</normalon>
-          <disabledoff>icon/search.svg</disabledoff>
-          <disabledon>icon/search.svg</disabledon>
-          <activeoff>icon/search.svg</activeoff>
-          <activeon>icon/search.svg</activeon>
-          <selectedoff>icon/search.svg</selectedoff>
-          <selectedon>icon/search.svg</selectedon>icon/search.svg</iconset>
-        </property>
-       </widget>
-       <widget class="QPushButton" name="pushButton_5">
-        <property name="geometry">
-         <rect>
-          <x>860</x>
-          <y>200</y>
-          <width>31</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color:#fff;</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset>
-          <normaloff>icon/search.svg</normaloff>
-          <normalon>icon/search.svg</normalon>
-          <disabledoff>icon/search.svg</disabledoff>
-          <disabledon>icon/search.svg</disabledon>
-          <activeoff>icon/search.svg</activeoff>
-          <activeon>icon/search.svg</activeon>
-          <selectedoff>icon/search.svg</selectedoff>
-          <selectedon>icon/search.svg</selectedon>icon/search.svg</iconset>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_14">
-        <property name="geometry">
-         <rect>
-          <x>780</x>
-          <y>100</y>
-          <width>81</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">color: rgb(0, 170, 127);</string>
-        </property>
-        <property name="text">
-         <string>Search for ID</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="label_15">
-        <property name="geometry">
-         <rect>
-          <x>770</x>
-          <y>170</y>
-          <width>121</width>
-          <height>16</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">color: rgb(255, 85, 0);</string>
-        </property>
-        <property name="text">
-         <string>Search for Category</string>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="recherche">
-        <property name="geometry">
-         <rect>
-          <x>760</x>
-          <y>130</y>
-          <width>101</width>
-          <height>31</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">background-color: rgb(255, 255, 255);
+        <widget class="QWidget" name="tab">
+         <attribute name="title">
+          <string>Search</string>
+         </attribute>
+         <widget class="QLineEdit" name="recherche">
+          <property name="geometry">
+           <rect>
+            <x>40</x>
+            <y>110</y>
+            <width>151</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
 color: rgb(0, 0, 0);</string>
-        </property>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pushButton">
+          <property name="geometry">
+           <rect>
+            <x>190</x>
+            <y>110</y>
+            <width>31</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color:#fff;</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>icon/search.svg</normaloff>
+            <normalon>icon/search.svg</normalon>
+            <disabledoff>icon/search.svg</disabledoff>
+            <disabledon>icon/search.svg</disabledon>
+            <activeoff>icon/search.svg</activeoff>
+            <activeon>icon/search.svg</activeon>
+            <selectedoff>icon/search.svg</selectedoff>
+            <selectedon>icon/search.svg</selectedon>icon/search.svg</iconset>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="recherche2">
+          <property name="geometry">
+           <rect>
+            <x>300</x>
+            <y>110</y>
+            <width>151</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pushButton_5">
+          <property name="geometry">
+           <rect>
+            <x>450</x>
+            <y>110</y>
+            <width>31</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color:#fff;</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>icon/search.svg</normaloff>
+            <normalon>icon/search.svg</normalon>
+            <disabledoff>icon/search.svg</disabledoff>
+            <disabledon>icon/search.svg</disabledon>
+            <activeoff>icon/search.svg</activeoff>
+            <activeon>icon/search.svg</activeon>
+            <selectedoff>icon/search.svg</selectedoff>
+            <selectedon>icon/search.svg</selectedon>icon/search.svg</iconset>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_15">
+          <property name="geometry">
+           <rect>
+            <x>330</x>
+            <y>60</y>
+            <width>131</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(255, 85, 0);</string>
+          </property>
+          <property name="text">
+           <string>Search for Category</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_14">
+          <property name="geometry">
+           <rect>
+            <x>80</x>
+            <y>60</y>
+            <width>121</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(0, 170, 127);</string>
+          </property>
+          <property name="text">
+           <string>Search for ID</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_18">
+          <property name="geometry">
+           <rect>
+            <x>580</x>
+            <y>60</y>
+            <width>131</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">color: rgb(255, 85, 0);
+color: rgb(255, 0, 127);</string>
+          </property>
+          <property name="text">
+           <string>Search for Name</string>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="recherche3">
+          <property name="geometry">
+           <rect>
+            <x>550</x>
+            <y>110</y>
+            <width>151</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color: rgb(255, 255, 255);
+color: rgb(0, 0, 0);</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pushButton_8">
+          <property name="geometry">
+           <rect>
+            <x>700</x>
+            <y>110</y>
+            <width>31</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color:#fff;</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+          <property name="icon">
+           <iconset>
+            <normaloff>icon/search.svg</normaloff>
+            <normalon>icon/search.svg</normalon>
+            <disabledoff>icon/search.svg</disabledoff>
+            <disabledon>icon/search.svg</disabledon>
+            <activeoff>icon/search.svg</activeoff>
+            <activeon>icon/search.svg</activeon>
+            <selectedoff>icon/search.svg</selectedoff>
+            <selectedon>icon/search.svg</selectedon>icon/search.svg</iconset>
+          </property>
+         </widget>
+        </widget>
        </widget>
       </widget>
      </widget>
@@ -2017,6 +2126,38 @@ color:rgb(0, 0, 0);</string>
         </widget>
        </item>
       </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="stat">
+     <widget class="QCustomPlot" name="plot" native="true">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>1031</width>
+        <height>491</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_7">
+      <property name="geometry">
+       <rect>
+        <x>950</x>
+        <y>530</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 75 11pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(255, 255, 255);
+background-color: rgb(0, 0, 0);
+font: 75 12pt &quot;MS Shell Dlg 2&quot;;
+</string>
+      </property>
+      <property name="text">
+       <string>Quit</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="UpdatePage">
@@ -2637,6 +2778,14 @@ color:grey;</string>
    </widget>
   </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QCustomPlot</class>
+   <extends>QWidget</extends>
+   <header>qcustomplot.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

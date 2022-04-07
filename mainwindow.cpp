@@ -1,9 +1,15 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "produit.h"
+#include "notification.h"
 #include <QMessageBox>
+#include <QPieSlice>
+#include <QPieSeries>
+#include <QtCharts>
 
-/*#include <QApplication>
+
+
+#include <QApplication>
 #include <QIntValidator>
 #include <QSqlQuery>
 #include <QFile>
@@ -17,7 +23,9 @@
 #include <QApplication>
 #include <QtPrintSupport/QPrinter>
 #include <QTextDocument>
-#include <QtCore>*/
+#include <QtCore>
+#include <QPixmap>
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -29,13 +37,22 @@ MainWindow::MainWindow(QWidget *parent)
     ui->table->setModel(p.afficher());
 
     //controle de saisie
-       /*ui->lineEdit_4->setValidator( new QIntValidator(0, 999999, this));
+
+      /* ui->lineEdit_4->setValidator( new QIntValidator(0, 999999, this));
        ui->lineEdit_3->setValidator( new QIntValidator(0, 999999, this));
+       ui->lineEdit_10->setValidator( new QIntValidator(0, 999999, this));
+              ui->lineEdit_9->setValidator( new QIntValidator(0, 999999, this));
        QRegExp rx("[a-zA-Z ]+");
        QValidator *validator = new
                QRegExpValidator(rx,this);
        ui->lineEdit_2->setValidator(validator);
-       ui->lineEdit->setValidator(validator);*/
+       ui->lineEdit->setValidator(validator);
+       ui->lineEdit_7->setValidator(validator);
+       ui->lineEdit_8->setValidator(validator);*/
+
+
+
+
 
 }
 
@@ -132,6 +149,11 @@ void MainWindow::on_LogoutBtn_5_clicked()
     ui->stackedWidget->setCurrentIndex(4);
 }
 
+void MainWindow::on_pushButton_7_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(1);
+}
+
 void MainWindow::on_buttonBox_2_accepted()
 {
 
@@ -151,7 +173,7 @@ void MainWindow::on_buttonBox_2_accepted()
         check1=p.checkchar(nomcheck);
         check2=p.checkint(prixcheck);
         check3=p.checkint(quantitecheck);
-        check4=p.checkint(nomfournisseurcheck);
+        check4=p.checkchar(nomfournisseurcheck);
 
 
     QString nom =ui->lineEdit->text();
@@ -188,6 +210,18 @@ void MainWindow::on_buttonBox_2_accepted()
     ui->lineEdit_2->clear();
     ui->lineEdit_3->clear();
     ui->lineEdit_4->clear();
+
+    QSqlQuery query;
+             query.prepare("select prix from produit where prix < 6");
+             query.exec();
+             query.next();
+             int q=query.value(0).toInt();
+             QString nomP=query.value(0).toString();
+             if(q<=6)
+             {
+                notification n;
+                n.notification_system();
+             }
 
 }
 
@@ -238,7 +272,7 @@ void MainWindow::on_pushButton_4_clicked()
     check1=p.checkchar(nomcheck);
     check2=p.checkint(prixcheck);
     check3=p.checkint(quantitecheck);
-    check4=p.checkint(nomfournisseurcheck);
+    check4=p.checkchar(nomfournisseurcheck);
 
     int id =ui->lineEdit_6->text().toInt();
         QString nom =ui->lineEdit_7->text();
@@ -338,6 +372,20 @@ void MainWindow::on_recherche2_textChanged(const QString &arg1)
                            ui->table->setModel(p.afficher_catrech(ch)) ;
                          }
 }
+void MainWindow::on_recherche3_textChanged(const QString &arg1)
+{
+    QString ch = arg1;
+
+                         if (ch=="")
+                         {
+                             ui->table->setModel(p.afficher());
+                         }
+                         else
+                         {
+                           ui->table->setModel(p.afficher_nomrech(ch)) ;
+                         }
+}
+
 
 void MainWindow::on_tri_categorie_clicked()
 {
@@ -356,4 +404,275 @@ void MainWindow::on_tri_quantite_clicked()
 }
 
 
+QString currDate()
+{
+    QDate date = QDate::currentDate();
+    return date.toString("dd.MM.yyyy");
+}
 
+
+void MainWindow::on_pushButton_6_clicked()//Statistiques
+{
+
+// set dark background gradient:
+    ui->stackedWidget->setCurrentIndex(3);
+        QLinearGradient gradient(0, 0, 0, 400);
+        gradient.setColorAt(0, QColor(90, 90, 90));
+        gradient.setColorAt(0.38, QColor(105, 105, 105));
+        gradient.setColorAt(1, QColor(70, 70, 70));
+        ui->plot->setBackground(QBrush(gradient));
+// create empty bar chart objects:
+        QCPBars *barQuantite = new QCPBars(ui->plot->xAxis, ui->plot->yAxis);
+        barQuantite->setAntialiased(false);
+        barQuantite->setStackingGap(1);
+
+        QCPBars *barPrix = new QCPBars(ui->plot->xAxis, ui->plot->yAxis);
+        barPrix->setAntialiased(false);
+        barPrix->setStackingGap(1);
+         //couleurs
+        barQuantite->setName("Product statistics by QUANTITY");
+        barQuantite->setPen(QPen(QColor(219, 129, 129).lighter(130)));
+        barQuantite->setBrush(QColor(219, 129, 129));
+        barPrix->setName("Product statistics by PRICE");
+        barPrix->setPen(QPen(QColor(242, 201, 131).lighter(150)));
+        barPrix->setBrush(QColor(242, 201, 131));
+
+// Placer les bars sur elles mêmes
+        barQuantite->moveAbove(barPrix);
+        barPrix->moveAbove(barQuantite);
+
+         //axe des abscisses
+        QVector<double> ticks;
+        QVector<QString> labels;
+        p.statistique(&ticks,&labels);
+
+        QSharedPointer<QCPAxisTickerText> textTicker(new QCPAxisTickerText);
+        textTicker->addTicks(ticks, labels);
+        ui->plot->xAxis->setTicker(textTicker);
+        ui->plot->xAxis->setTickLabelRotation(60);
+        ui->plot->xAxis->setSubTicks(false);
+        ui->plot->xAxis->setTickLength(0,4);
+        ui->plot->xAxis->setRange(0,4);
+        ui->plot->xAxis->setBasePen(QPen(Qt::white));
+        ui->plot->xAxis->setTickPen(QPen(Qt::white));
+        ui->plot->xAxis->grid()->setVisible(true);
+        ui->plot->xAxis->grid()->setPen(QPen(QColor(130, 130, 130), 0, Qt::DotLine));
+        ui->plot->xAxis->setTickLabelColor(Qt::white);
+        ui->plot->xAxis->setLabelColor(Qt::white);
+
+        // axe des ordonnées
+        ui->plot->yAxis->setRange(0,12.1);
+        ui->plot->yAxis->setPadding(5);
+        ui->plot->yAxis->setLabel("Statistics");
+        ui->plot->yAxis->setBasePen(QPen(Qt::white));
+        ui->plot->yAxis->setTickPen(QPen(Qt::white));
+        ui->plot->yAxis->setSubTickPen(QPen(Qt::white));
+        ui->plot->yAxis->grid()->setSubGridVisible(true);
+        ui->plot->yAxis->setTickLabelColor(Qt::white);
+        ui->plot->yAxis->setLabelColor(Qt::white);
+        ui->plot->yAxis->grid()->setPen(QPen(QColor(130, 130, 130), 0, Qt::SolidLine));
+        ui->plot->yAxis->grid()->setSubGridPen(QPen(QColor(130, 130, 130), 0, Qt::DotLine));
+
+        // ajout des données  (statistiques de la quantité)//
+
+        QVector<double> PlaceData,PlaceData2;
+        QSqlQuery q1("select QUANTITE from PRODUITS");
+        QSqlQuery q2("select PRIX_UNITAIRE from PRODUITS");
+
+        while (q1.next()) {
+                      int  nbr_fautee = q1.value(0).toInt();
+                      PlaceData<< nbr_fautee;
+                        }
+        while (q2.next()) {
+                      int  nbr_fautee = q2.value(0).toInt();
+                      PlaceData2<< nbr_fautee;
+                        }
+        barQuantite->setData(ticks, PlaceData);
+        barPrix->setData(ticks, PlaceData2);
+
+//setup legend
+        ui->plot->legend->setVisible(true);
+        ui->plot->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignTop|Qt::AlignHCenter);
+        ui->plot->legend->setBrush(QColor(255, 255, 255, 100));
+        ui->plot->legend->setBorderPen(Qt::NoPen);
+        QFont legendFont = font();
+        legendFont.setPointSize(10);
+        ui->plot->legend->setFont(legendFont);
+        ui->plot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
+
+
+}
+
+
+void MainWindow::on_PdfBtn_2_clicked()
+{
+    {
+          QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
+                                                      "/home",
+                                                      QFileDialog::ShowDirsOnly
+                                                      | QFileDialog::DontResolveSymlinks);
+          qDebug()<<dir;
+          QPdfWriter pdf(dir+"/PdfList.pdf");
+                                 QPainter painter(&pdf);
+                                int i = 4000;
+
+                                painter.drawPixmap(QRect(100,100,2000,2000),QPixmap("C:/Users/Admin/Desktop/logo.png"));
+                                    painter.drawText(900,650,"IPrintz");
+
+                                     //painter.drawPixmap(QRect(7600,100,2100,2700),QPixmap("C:/Users/Admin/Desktop/logo.png"));
+
+                                     painter.setPen(Qt::red);
+                                     painter.setFont(QFont("Time New Roman", 25));
+                                     painter.drawText(3000,1400,"Liste Des Produits");
+                                     painter.setPen(Qt::black);
+                                     painter.setFont(QFont("Time New Roman", 15));
+                                     painter.drawRect(100,100,9400,2500); // dimension taa rectangle li fih liste
+                                     painter.drawRect(100,3000,9400,500);
+                                     painter.setFont(QFont("Time New Roman", 9));
+                                     painter.drawText(300,3300,"ID");
+                                     painter.drawText(2300,3300,"Category");
+                                     painter.drawText(4300,3300,"Quantity");
+                                     painter.drawText(6300,3300,"Name");
+                                     painter.drawText(7500,3300,"Price");
+                                     painter.drawText(8500,3300,"Provider");
+
+                                     painter.drawRect(100,3000,9400,10700);
+
+
+                                     QTextDocument previewDoc;
+                                     QString pdflist = QDate::currentDate().toString("'data_'MM_dd_yyyy'.txt'");
+
+
+                                     QTextCursor cursor(&previewDoc);
+
+
+
+                                     QSqlQuery query;
+                                     query.prepare("select * from produits");
+                                     query.exec();
+                                     while (query.next())
+                                     {
+                                         painter.drawText(300,i,query.value(0).toString());
+                                         painter.drawText(2300,i,query.value(1).toString());
+                                         painter.drawText(4300,i,query.value(2).toString());
+                                         painter.drawText(6300,i,query.value(3).toString());
+                                         painter.drawText(7500,i,query.value(4).toString());
+                                         painter.drawText(8500,i,query.value(5).toString());
+
+
+
+
+                                        i = i +500;
+                                     }
+                                     int reponse = QMessageBox::question(this, "Générer PDF", "<PDF Enregistré>...Vous Voulez Affichez Le PDF ?",
+                                                                         QMessageBox::Yes|QMessageBox::No);
+                                         if (reponse == QMessageBox::Yes)
+                                         {
+                                             QDesktopServices::openUrl(QUrl::fromLocalFile(dir+"/PdfList.pdf"));
+
+                                             painter.end();
+                                         }
+                                         else
+                                         {
+                                              painter.end();
+}
+
+
+    }
+
+
+}
+
+
+void MainWindow::on_Excel_clicked()
+{
+
+    QTableView *table;
+                   table = ui->table;
+
+                   QString filters("CSV files (.xlsx);;All files (.*)");
+                   QString defaultFilter("CSV files (*.xlsx)");
+                   QString fileName = QFileDialog::getSaveFileName(0, "Save file", QCoreApplication::applicationDirPath(),
+                                      filters, &defaultFilter);
+                   QFile file(fileName);
+
+                   QAbstractItemModel *model =  table->model();
+                   if (file.open(QFile::WriteOnly | QFile::Truncate)) {
+                       QTextStream data(&file);
+                       QStringList strList;
+                       for (int i = 0; i < model->columnCount(); i++) {
+                           if (model->headerData(i, Qt::Horizontal, Qt::DisplayRole).toString().length() > 0)
+                               strList.append("\"" + model->headerData(i, Qt::Horizontal, Qt::DisplayRole).toString() + "\"");
+                           else
+                               strList.append("");
+                       }
+                       data << strList.join(";") << "\n";
+                       for (int i = 0; i < model->rowCount(); i++) {
+                           strList.clear();
+                           for (int j = 0; j < model->columnCount(); j++) {
+
+                               if (model->data(model->index(i, j)).toString().length() > 0)
+                                   strList.append("\"" + model->data(model->index(i, j)).toString() + "\"");
+                               else
+                                   strList.append("");
+                           }
+                           data << strList.join(";") + "\n";
+                       }
+                       file.close();
+                       QMessageBox::information(nullptr, QObject::tr("Export excel"),
+                                                 QObject::tr("Export Successfully.\n"
+                                                             "Click OK to exit."), QMessageBox::Ok);
+                   }
+}
+
+
+
+
+
+void MainWindow::on_pushButton_9_clicked()
+{
+    QSqlQueryModel * model= new QSqlQueryModel();
+                             model->setQuery("select * from produits where CATEGORIE = 'VETEMENTS' ");
+                             float e=model->rowCount();
+                             model->setQuery("select * from produits where CATEGORIE = 'PAPIERS' ");
+                             float ee=model->rowCount();
+                             model->setQuery("select * from produits where CATEGORIE = 'PHOTOGRAPHIE' ");
+                             float eee=model->rowCount();
+                             float total=e+ee+eee;
+                             QString a=QString("VETEMENTS "+QString::number((e*100)/total,'f',2)+"%" );
+                             QString b=QString("PAPIERS "+QString::number((ee*100)/total,'f',2)+"%" );
+                             QString c=QString("PHOTOGRAPHIE "+QString::number((eee*100)/total,'f',2)+"%" );
+                             QPieSeries *series = new QPieSeries();
+                             series->append(a,e);
+                             series->append(b,ee);
+                             series->append(c,eee);
+                     if (e!=0)
+                     {QPieSlice *slice = series->slices().at(0);
+                      slice->setLabelVisible();
+                      slice->setPen(QPen());}
+                     if ( ee!=0)
+                     {
+                              // Add label, explode and define brush for 2nd slice
+                              QPieSlice *slice1 = series->slices().at(1);
+                              //slice1->setExploded();
+                              slice1->setLabelVisible();
+                     }
+                     if(eee!=0)
+                     {
+                              // Add labels to rest of slices
+                              QPieSlice *slice2 = series->slices().at(2);
+                              //slice1->setExploded();
+                              slice2->setLabelVisible();
+                     }
+                             // Create the chart widget
+                             QChart *chart = new QChart();
+                             // Add data to chart with title and hide legend
+                             chart->addSeries(series);
+                             chart->setTitle("Pourcentage Produits : nombre de Produits : "+ QString::number(total));
+                             chart->legend()->hide();
+                             // Used to display the chart
+                             QChartView *chartView = new QChartView(chart);
+                             chartView->setRenderHint(QPainter::Antialiasing);
+                             chartView->resize(1000,500);
+                             chartView->show();
+}

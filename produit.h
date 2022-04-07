@@ -40,13 +40,20 @@ public:
 
 void on_recherche_textChanged(const QString &arg1);
 void on_recherche2_textChanged(const QString &arg1);
+void on_recherche3_textChanged(const QString &arg1);
+
 
     QSqlQueryModel *afficher_idrech(QString);
     QSqlQueryModel *afficher_catrech(QString);
+    QSqlQueryModel *afficher_nomrech(QString);
+
 
     QSqlQueryModel *tri_Categorie();
     QSqlQueryModel *tri_ID();
     QSqlQueryModel *tri_quantite();
+
+ void statistique(QVector<double>* ticks,QVector<QString> *labels);
+
 
 
 
