@@ -6,9 +6,6 @@
 #include <QPieSlice>
 #include <QPieSeries>
 #include <QtCharts>
-
-
-
 #include <QApplication>
 #include <QIntValidator>
 #include <QSqlQuery>
@@ -18,47 +15,70 @@
 #include <QtDebug>
 #include <QPdfWriter>
 #include <QPainter>
+#include <QPixmap>
 #include <QDesktopServices>
 #include <QUrl>
 #include <QApplication>
 #include <QtPrintSupport/QPrinter>
 #include <QTextDocument>
 #include <QtCore>
-#include <QPixmap>
 
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+
+MainWindow::MainWindow(QWidget *parent): QMainWindow(parent),
+    ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
     //this->ui->stackedWidget->setCurrentIndex(0);
     this->ui->stackedWidget->setCurrentIndex(1);
+    ui->pushButton_9->setVisible(false);
     ui->table->setModel(p.afficher());
 
-    //controle de saisie
-
-      /* ui->lineEdit_4->setValidator( new QIntValidator(0, 999999, this));
-       ui->lineEdit_3->setValidator( new QIntValidator(0, 999999, this));
-       ui->lineEdit_10->setValidator( new QIntValidator(0, 999999, this));
-              ui->lineEdit_9->setValidator( new QIntValidator(0, 999999, this));
-       QRegExp rx("[a-zA-Z ]+");
-       QValidator *validator = new
-               QRegExpValidator(rx,this);
-       ui->lineEdit_2->setValidator(validator);
-       ui->lineEdit->setValidator(validator);
-       ui->lineEdit_7->setValidator(validator);
-       ui->lineEdit_8->setValidator(validator);*/
 
 
+    int ret=A.connect_arduino(); // lancer la connexion à arduino
+        switch(ret){
+        case(0):qDebug()<< "arduino is available and connected to : "<< A.getarduino_port_name();
+            break;
+        case(1):qDebug() << "arduino is available but not connected to :" <<A.getarduino_port_name();
+           break;
+        case(-1):qDebug() << "arduino is not available";
+        }
+         QObject::connect(A.getserial(),SIGNAL(readyRead()),this,SLOT(update_label())); // permet de lancer
+         //le slot update_label suite à la reception du signal readyRead (reception des données).
 
 
 
 }
 
+
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::update_label()
+{
+    data=A.read_from_arduino();
+    qDebug() << "les donees ont ete lus";
+    if(data=="1"){
+        qDebug() << "1 a ete recu";
+       // ui->label_19->setText(data);
+        ui->label_19->setText(" Access allowed to an employee "); // si les données reçues de arduino via la liaison série sont égales à 1
+        ui->pushButton_9->setVisible(true);
+
+     }
+    else
+    {
+        qDebug() << "0 a ete recu";
+       // ui->label_19->setText(data);
+        ui->label_19->setText(" Alert : someone is trying to enter the room "); // si les données reçues de arduino via la liaison série sont égales à 1
+
+
+    }
+
+
+
 }
 
 void MainWindow::on_HomeBtn_clicked()
@@ -411,100 +431,8 @@ QString currDate()
 }
 
 
-void MainWindow::on_pushButton_6_clicked()//Statistiques
-{
 
-// set dark background gradient:
-    ui->stackedWidget->setCurrentIndex(3);
-        QLinearGradient gradient(0, 0, 0, 400);
-        gradient.setColorAt(0, QColor(90, 90, 90));
-        gradient.setColorAt(0.38, QColor(105, 105, 105));
-        gradient.setColorAt(1, QColor(70, 70, 70));
-        ui->plot->setBackground(QBrush(gradient));
-// create empty bar chart objects:
-        QCPBars *barQuantite = new QCPBars(ui->plot->xAxis, ui->plot->yAxis);
-        barQuantite->setAntialiased(false);
-        barQuantite->setStackingGap(1);
-
-        QCPBars *barPrix = new QCPBars(ui->plot->xAxis, ui->plot->yAxis);
-        barPrix->setAntialiased(false);
-        barPrix->setStackingGap(1);
-         //couleurs
-        barQuantite->setName("Product statistics by QUANTITY");
-        barQuantite->setPen(QPen(QColor(219, 129, 129).lighter(130)));
-        barQuantite->setBrush(QColor(219, 129, 129));
-        barPrix->setName("Product statistics by PRICE");
-        barPrix->setPen(QPen(QColor(242, 201, 131).lighter(150)));
-        barPrix->setBrush(QColor(242, 201, 131));
-
-// Placer les bars sur elles mêmes
-        barQuantite->moveAbove(barPrix);
-        barPrix->moveAbove(barQuantite);
-
-         //axe des abscisses
-        QVector<double> ticks;
-        QVector<QString> labels;
-        p.statistique(&ticks,&labels);
-
-        QSharedPointer<QCPAxisTickerText> textTicker(new QCPAxisTickerText);
-        textTicker->addTicks(ticks, labels);
-        ui->plot->xAxis->setTicker(textTicker);
-        ui->plot->xAxis->setTickLabelRotation(60);
-        ui->plot->xAxis->setSubTicks(false);
-        ui->plot->xAxis->setTickLength(0,4);
-        ui->plot->xAxis->setRange(0,4);
-        ui->plot->xAxis->setBasePen(QPen(Qt::white));
-        ui->plot->xAxis->setTickPen(QPen(Qt::white));
-        ui->plot->xAxis->grid()->setVisible(true);
-        ui->plot->xAxis->grid()->setPen(QPen(QColor(130, 130, 130), 0, Qt::DotLine));
-        ui->plot->xAxis->setTickLabelColor(Qt::white);
-        ui->plot->xAxis->setLabelColor(Qt::white);
-
-        // axe des ordonnées
-        ui->plot->yAxis->setRange(0,12.1);
-        ui->plot->yAxis->setPadding(5);
-        ui->plot->yAxis->setLabel("Statistics");
-        ui->plot->yAxis->setBasePen(QPen(Qt::white));
-        ui->plot->yAxis->setTickPen(QPen(Qt::white));
-        ui->plot->yAxis->setSubTickPen(QPen(Qt::white));
-        ui->plot->yAxis->grid()->setSubGridVisible(true);
-        ui->plot->yAxis->setTickLabelColor(Qt::white);
-        ui->plot->yAxis->setLabelColor(Qt::white);
-        ui->plot->yAxis->grid()->setPen(QPen(QColor(130, 130, 130), 0, Qt::SolidLine));
-        ui->plot->yAxis->grid()->setSubGridPen(QPen(QColor(130, 130, 130), 0, Qt::DotLine));
-
-        // ajout des données  (statistiques de la quantité)//
-
-        QVector<double> PlaceData,PlaceData2;
-        QSqlQuery q1("select QUANTITE from PRODUITS");
-        QSqlQuery q2("select PRIX_UNITAIRE from PRODUITS");
-
-        while (q1.next()) {
-                      int  nbr_fautee = q1.value(0).toInt();
-                      PlaceData<< nbr_fautee;
-                        }
-        while (q2.next()) {
-                      int  nbr_fautee = q2.value(0).toInt();
-                      PlaceData2<< nbr_fautee;
-                        }
-        barQuantite->setData(ticks, PlaceData);
-        barPrix->setData(ticks, PlaceData2);
-
-//setup legend
-        ui->plot->legend->setVisible(true);
-        ui->plot->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignTop|Qt::AlignHCenter);
-        ui->plot->legend->setBrush(QColor(255, 255, 255, 100));
-        ui->plot->legend->setBorderPen(Qt::NoPen);
-        QFont legendFont = font();
-        legendFont.setPointSize(10);
-        ui->plot->legend->setFont(legendFont);
-        ui->plot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
-
-
-}
-
-
-void MainWindow::on_PdfBtn_2_clicked()
+void MainWindow::on_pdf_clicked()
 {
     {
           QString dir = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
@@ -628,41 +556,154 @@ void MainWindow::on_Excel_clicked()
 
 
 
-
-void MainWindow::on_pushButton_9_clicked()
+void MainWindow::on_statistics_clicked()//Statistiques
 {
-    QSqlQueryModel * model= new QSqlQueryModel();
+
+// set dark background gradient:
+    ui->stackedWidget->setCurrentIndex(3);
+        QLinearGradient gradient(0, 0, 0, 400);
+        gradient.setColorAt(0, QColor(90, 90, 90));
+        gradient.setColorAt(0.38, QColor(105, 105, 105));
+        gradient.setColorAt(1, QColor(70, 70, 70));
+        ui->plot->setBackground(QBrush(gradient));
+// create empty bar chart objects:
+        QCPBars *barQuantite = new QCPBars(ui->plot->xAxis, ui->plot->yAxis);
+        barQuantite->setAntialiased(false);
+        barQuantite->setStackingGap(1);
+
+        QCPBars *barPrix = new QCPBars(ui->plot->xAxis, ui->plot->yAxis);
+        barPrix->setAntialiased(false);
+        barPrix->setStackingGap(1);
+         //couleurs
+        barQuantite->setName("Product statistics by QUANTITY");
+        barQuantite->setPen(QPen(QColor(219, 129, 129).lighter(130)));
+        barQuantite->setBrush(QColor(219, 129, 129));
+        barPrix->setName("Product statistics by PRICE");
+        barPrix->setPen(QPen(QColor(242, 201, 131).lighter(150)));
+        barPrix->setBrush(QColor(242, 201, 131));
+
+// Placer les bars sur elles mêmes
+        barQuantite->moveAbove(barPrix);
+        barPrix->moveAbove(barQuantite);
+
+         //axe des abscisses
+        QVector<double> ticks;
+        QVector<QString> labels;
+        p.statistique(&ticks,&labels);
+
+        QSharedPointer<QCPAxisTickerText> textTicker(new QCPAxisTickerText);
+        textTicker->addTicks(ticks, labels);
+        ui->plot->xAxis->setTicker(textTicker);
+        ui->plot->xAxis->setTickLabelRotation(60);
+        ui->plot->xAxis->setSubTicks(false);
+        ui->plot->xAxis->setTickLength(0,4);
+        ui->plot->xAxis->setRange(0,4);
+        ui->plot->xAxis->setBasePen(QPen(Qt::white));
+        ui->plot->xAxis->setTickPen(QPen(Qt::white));
+        ui->plot->xAxis->grid()->setVisible(true);
+        ui->plot->xAxis->grid()->setPen(QPen(QColor(130, 130, 130), 0, Qt::DotLine));
+        ui->plot->xAxis->setTickLabelColor(Qt::white);
+        ui->plot->xAxis->setLabelColor(Qt::white);
+
+        // axe des ordonnées
+        ui->plot->yAxis->setRange(0,12.1);
+        ui->plot->yAxis->setPadding(5);
+        ui->plot->yAxis->setLabel("Statistics");
+        ui->plot->yAxis->setBasePen(QPen(Qt::white));
+        ui->plot->yAxis->setTickPen(QPen(Qt::white));
+        ui->plot->yAxis->setSubTickPen(QPen(Qt::white));
+        ui->plot->yAxis->grid()->setSubGridVisible(true);
+        ui->plot->yAxis->setTickLabelColor(Qt::white);
+        ui->plot->yAxis->setLabelColor(Qt::white);
+        ui->plot->yAxis->grid()->setPen(QPen(QColor(130, 130, 130), 0, Qt::SolidLine));
+        ui->plot->yAxis->grid()->setSubGridPen(QPen(QColor(130, 130, 130), 0, Qt::DotLine));
+
+        // ajout des données  (statistiques de la quantité et du prix)//
+
+        QVector<double> PlaceData,PlaceData2;
+        QSqlQuery q1("select QUANTITE from PRODUITS");
+        QSqlQuery q2("select PRIX_UNITAIRE from PRODUITS");
+
+        while (q1.next()) {
+                      int  nbr_fautee = q1.value(0).toInt();
+                      PlaceData<< nbr_fautee;
+                        }
+        while (q2.next()) {
+                      int  nbr_fautee = q2.value(0).toInt();
+                      PlaceData2<< nbr_fautee;
+                        }
+        barQuantite->setData(ticks, PlaceData);
+        barPrix->setData(ticks, PlaceData2);
+
+//setup legend
+        ui->plot->legend->setVisible(true);
+        ui->plot->axisRect()->insetLayout()->setInsetAlignment(0, Qt::AlignTop|Qt::AlignHCenter);
+        ui->plot->legend->setBrush(QColor(255, 255, 255, 100));
+        ui->plot->legend->setBorderPen(Qt::NoPen);
+        QFont legendFont = font();
+        legendFont.setPointSize(10);
+        ui->plot->legend->setFont(legendFont);
+        ui->plot->setInteractions(QCP::iRangeDrag | QCP::iRangeZoom);
+
+
+}
+
+
+void MainWindow::on_statCategorie_clicked()
+{
+   QSqlQueryModel * model= new QSqlQueryModel();
                              model->setQuery("select * from produits where CATEGORIE = 'VETEMENTS' ");
-                             float e=model->rowCount();
+                             float cat1=model->rowCount();
                              model->setQuery("select * from produits where CATEGORIE = 'PAPIERS' ");
-                             float ee=model->rowCount();
+                             float cat2=model->rowCount();
                              model->setQuery("select * from produits where CATEGORIE = 'PHOTOGRAPHIE' ");
-                             float eee=model->rowCount();
-                             float total=e+ee+eee;
-                             QString a=QString("VETEMENTS "+QString::number((e*100)/total,'f',2)+"%" );
-                             QString b=QString("PAPIERS "+QString::number((ee*100)/total,'f',2)+"%" );
-                             QString c=QString("PHOTOGRAPHIE "+QString::number((eee*100)/total,'f',2)+"%" );
+                             float cat3=model->rowCount();
+                             model->setQuery("select * from produits where CATEGORIE = 'ENCRE' ");
+                             float cat4=model->rowCount();
+                             model->setQuery("select * from produits where CATEGORIE = 'AUTRES' ");
+                             float cat5=model->rowCount();
+                             float total=cat1+cat2+cat3+cat4+cat5;
+                             QString a=QString("VETEMENTS "+QString::number((cat1*100)/total,'f',2)+"%" );
+                             QString b=QString("PAPIERS "+QString::number((cat2*100)/total,'f',2)+"%" );
+                             QString c=QString("PHOTOGRAPHIE "+QString::number((cat3*100)/total,'f',2)+"%" );
+                             QString d=QString("ENCRE "+QString::number((cat4*100)/total,'f',2)+"%" );
+                             QString e=QString("AUTRES "+QString::number((cat5*100)/total,'f',2)+"%" );
+
                              QPieSeries *series = new QPieSeries();
-                             series->append(a,e);
-                             series->append(b,ee);
-                             series->append(c,eee);
-                     if (e!=0)
+                             series->append(a,cat1);
+                             series->append(b,cat2);
+                             series->append(c,cat3);
+                             series->append(d,cat4);
+                             series->append(e,cat5);
+
+                     if (cat1!=0)
                      {QPieSlice *slice = series->slices().at(0);
                       slice->setLabelVisible();
                       slice->setPen(QPen());}
-                     if ( ee!=0)
+                     if (cat2!=0)
                      {
                               // Add label, explode and define brush for 2nd slice
                               QPieSlice *slice1 = series->slices().at(1);
                               //slice1->setExploded();
                               slice1->setLabelVisible();
                      }
-                     if(eee!=0)
+                     if(cat3!=0)
                      {
                               // Add labels to rest of slices
                               QPieSlice *slice2 = series->slices().at(2);
-                              //slice1->setExploded();
                               slice2->setLabelVisible();
+                     }
+                     if(cat4!=0)
+                     {
+                              // Add labels to rest of slices
+                              QPieSlice *slice3 = series->slices().at(3);
+                              slice3->setLabelVisible();
+                     }
+                     if(cat5!=0)
+                     {
+                              // Add labels to rest of slices
+                              QPieSlice *slice4 = series->slices().at(4);
+                              slice4->setLabelVisible();
                      }
                              // Create the chart widget
                              QChart *chart = new QChart();
@@ -675,4 +716,23 @@ void MainWindow::on_pushButton_9_clicked()
                              chartView->setRenderHint(QPainter::Antialiasing);
                              chartView->resize(1000,500);
                              chartView->show();
+
+
+
+
+}
+
+void MainWindow::on_pushButton_6_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(4);
+}
+
+void MainWindow::on_pushButton_10_clicked()
+{
+   ui->stackedWidget->setCurrentIndex(1);
+}
+
+void MainWindow::on_pushButton_9_clicked()
+{
+    A.write_to_arduino("1");
 }

@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "produit.h"
+#include "arduino.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -77,12 +78,9 @@ private slots:
     void on_tri_quantite_clicked();
 
 
+    void on_statistics_clicked();
 
-
-
-    void on_pushButton_6_clicked();
-
-    void on_PdfBtn_2_clicked();
+    void on_pdf_clicked();
 
     void on_Excel_clicked();
 
@@ -90,10 +88,21 @@ private slots:
 
 
 
+    void on_statCategorie_clicked();
+
+    void on_pushButton_6_clicked();
+
+    void update_label();   // slot permettant la mise à jour du label état de la lampe 1,
+
+
+    void on_pushButton_10_clicked();
+
     void on_pushButton_9_clicked();
 
 private:
     Ui::MainWindow *ui;
     produit p;
+    QByteArray data;
+    Arduino A;
 };
 #endif // MAINWINDOW_H

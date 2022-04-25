@@ -261,3 +261,5 @@ void produit::statistique(QVector<double>* ticks,QVector<QString> *labels)
          *labels <<identifiant;
      }
  }
+
+
