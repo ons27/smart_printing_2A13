@@ -20,6 +20,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    arduino.cpp \
     conge.cpp \
     connection.cpp \
     employee.cpp \
@@ -27,15 +28,22 @@ SOURCES += \
     interventions.cpp \
     main.cpp \
     mainwindow.cpp \
+    notification.cpp \
+    produit.cpp \
+    qcustomplot.cpp \
     qrcode.cpp
 
 HEADERS += \
+    arduino.h \
     conge.h \
     connection.h \
     employee.h \
     equipements.h \
     interventions.h \
     mainwindow.h \
+    notification.h \
+    produit.h \
+    qcustomplot.h \
     qrcode.h
 
 FORMS += \
