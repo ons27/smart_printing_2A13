@@ -6,8 +6,7 @@
 #include"conge.h"
 #include "equipements.h"
 #include "interventions.h"
-#include "produit.h"
-#include "arduino.h"
+#include "commandes.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -201,63 +200,57 @@ private slots:
 
     void on_pushButton_82_clicked();
 
-    void on_buttonBox_6_accepted();
+    void on_HomeBtn_9_clicked();
 
-    void on_pushButton_37_clicked();
+    void on_DataBtn_11_clicked();
 
-    void on_pushButton_38_clicked();
+    void on_addeq_11_clicked();
 
-    void on_table_3_activated(const QModelIndex &index);
+    void on_DataBtn_9_clicked();
 
-    void on_recherche_textChanged(const QString &arg1);
-
-    void on_recherche2_textChanged(const QString &arg1);
-
-    void on_recherche3_textChanged(const QString &arg1);
-
-    void on_tri_quantite_clicked();
-
-    void on_tri_categorie_clicked();
-
-    void on_tri_id_clicked();
-
-    void on_pdf_clicked();
-
-    void on_Excel_clicked();
-
-    void on_statistics_4_clicked();
-
-    void on_statCategorie_4_clicked();
-
-    void on_pushButton_86_clicked();
-
-    void on_HomeBtn_26_clicked();
-
-    void on_DataBtn_26_clicked();
-
-    void on_addeq_26_clicked();
-
-    void on_HomeBtn_22_clicked();
-
-    void on_DataBtn_22_clicked();
-
-    void on_addeq_22_clicked();
-
-    void on_HomeBtn_10_clicked();
+    void on_addeq_9_clicked();
 
     void on_DataBtn_10_clicked();
 
     void on_addeq_10_clicked();
 
+    void on_pushButton_37_clicked();
 
-    void on_LogoutBtn_26_clicked();
-     void update_label();
+    void on_pushButton_38_clicked();
 
-     void on_pushButton_42_clicked();
+    void on_PdfBtn_11_clicked();
 
-     void on_pushButton_95_clicked();
+    void on_qr_clicked();
 
-     void on_pushButton_94_clicked();
+    void on_pushButton_42_clicked();
+
+    void on_pushButton_40_clicked();
+
+    void on_pushButton_44_clicked();
+
+    void on_pushButton_43_clicked();
+
+    void on_pushButton_41_clicked();
+
+    void on_pushButton_39_clicked();
+
+    void on_buttonBox_5_accepted();
+
+    void on_LogoutBtn_11_clicked();
+
+    void on_LogoutBtn_10_clicked();
+
+    void on_LogoutBtn_9_clicked();
+
+    void on_LogoutBtn_33_clicked();
+
+    void on_LogoutBtn_34_clicked();
+
+    void on_LogoutBtn_35_clicked();
+
+    void on_LogoutBtn_36_clicked();
+
+    void on_table_3_activated(const QModelIndex &index);
 
 private:
     Ui::MainWindow *ui;
@@ -265,9 +258,7 @@ private:
     Conge c ;
     equipement ee;
     interventions i;
-    produit p;
-    Arduino A;
-    QByteArray data;
+    commandes cc;
 };
 #endif // MAINWINDOW_H
 
