@@ -1,4 +1,5 @@
 #include "fournisseurs.h"
+#include "produit.h"
 #include <QString>
 #include<QtSql/QSqlQueryModel>
 #include<QtSql/QSqlQuery>
