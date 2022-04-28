@@ -26,7 +26,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     arduinomov.cpp \
+<<<<<<< HEAD
     arduinor.cpp \
+=======
+>>>>>>> 9cdc5de51a5e4b9e00fe648bc684815af01e3d83
     client.cpp \
     commandes.cpp \
     conge.cpp \
@@ -42,7 +45,10 @@ SOURCES += \
 
 HEADERS += \
     arduinomov.h \
+<<<<<<< HEAD
     arduinor.h \
+=======
+>>>>>>> 9cdc5de51a5e4b9e00fe648bc684815af01e3d83
     client.h \
     commandes.h \
     conge.h \
